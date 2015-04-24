@@ -2,9 +2,9 @@ package primos;
 
 import java.util.HashSet;
 
-public class ArbolNumeros extends HashSet<Integer>{
+public class ConjuntoMuestrasNumeros extends HashSet<Integer>{
     
-    public ArbolNumeros (int m, int n){
+    public ConjuntoMuestrasNumeros (int m, int n){
         for (int i = 0; i < m; i++) {
             while (!this.add((int) (Math.random() * n))){};
         }

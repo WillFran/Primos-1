@@ -3,9 +3,9 @@ package primos;
 public class Primos {
 
     public static void main(String[] args) {
-        
-        int m = 0;
-        int n = 0;
+        UserInterface ui = new CLIUserInterface();
+        int m = ui.dameNumeroMuestras();
+        int n = ui.dameNumero();
         CalculoPrimo calculoPrimo = new CalculoPrimo(m, n);
     }
     
