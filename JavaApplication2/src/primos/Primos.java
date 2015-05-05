@@ -32,6 +32,7 @@ public class Primos {
             n=genC.dameCompuesto();
             m=(int) (Math.random() * n);
             calculoPrimo = new CalculoPrimo(m, n);
+            System.out.println("Probabilidad de acierto: " + (1-1/Math.pow(2, m)));
             if(!calculoPrimo.ejecutar()){
                 System.out.println("Se determina que no es compueso el número: " +n
                         +"generado por el generador de compuestos.");
