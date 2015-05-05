@@ -44,11 +44,11 @@ public class CalculoPrimo {
             if (cumpleFuncion(i)) {
                 resultado.add(i);
             }
-
         }
+        
     }
 
     private boolean cumpleFuncion(int i) {
-        return (n-1)/Math.pow(2d,i)%1 == 0; //Funcionará?
+        return (n-1)%Math.pow(2d,i) == 0;
     }
 }
