@@ -34,7 +34,7 @@ public class CalculoPrimo {
     private boolean evaluaCondicionCompuesta(Integer bi) {
         Iterator<Integer> iterador = conjuntoKs.iterator();
         boolean resultado = false;
-        while (iterador.hasNext()){ //en conjuntoKs se guardan los valores de k que cumplen la condicion primera
+        while (iterador.hasNext() && !resultado){ //en conjuntoKs se guardan los valores de k que cumplen la condicion primera
             Integer k = iterador.next();
             resultado = segundaCondicion(bi,k); //por tanto sólo hay que comprobar la segunda condicion
         }
@@ -42,7 +42,7 @@ public class CalculoPrimo {
     }
 
     private boolean segundaCondicion(Integer bi, Integer k) {
-        return (1 < mcd((int)Math.pow(bi,k),n) && mcd((int)Math.pow(bi,k),n) < n);
+        return (1 < mcd((int)Math.pow(bi,k)-1,n) && mcd((int)Math.pow(bi,k)-1,n) < n);
     }
 
     private int mcd(int a, int b) {
@@ -55,16 +55,16 @@ public class CalculoPrimo {
     private ArrayList<Integer> calculaConjuntoKs() {
         ArrayList<Integer> resultado = new ArrayList<>();
 
-        for (int i = 1; i < n - 1; i++) {
-            if (cumpleFuncion(i)) {
-                resultado.add((int) ((n-1)/Math.pow(2d,i)) );
+        for (int j = 1; j < n - 1; j++) {
+            if (cumpleFuncion(j)) {
+                resultado.add((int) ((n-1)/Math.pow(2d,j)) );
             }
         }
         return resultado;
     }
 
     private boolean cumpleFuncion(int i) {
-        return (n-1)%Math.pow(2d,i) == 0;
+        return (int)((n-1)%Math.pow(2,i)) == 0;
     }
 
 }
