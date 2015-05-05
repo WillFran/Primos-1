@@ -1,6 +1,7 @@
 package primos;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CalculoPrimo {
 
@@ -27,16 +28,30 @@ public class CalculoPrimo {
                 return false;
             }
         }
+        return true;
     }
 
     private boolean evaluaCondicionCompuesta(Integer bi) {
-        return (primeraCondicion() && segundaCondicion(bi));
+        Iterator<Integer> iterador = conjuntoJs.iterator();
+        boolean resultado = false;
+        while (iterador.hasNext()){ //en conjuntoJs se guardan los valores de k que cumplen la condicion primera
+            Integer k = iterador.next();
+            resultado = segundaCondicion(bi,k); //por tanto sólo hay que comprobar la segunda condicion
+        }
+        return resultado;
     }
 
-    private boolean primeraCondicion() {
-        return conjuntoJs.size() > 0;
+    private boolean segundaCondicion(Integer bi, Integer k) {
+        return (1 < mcd((int)Math.pow(bi,k),n) && mcd((int)Math.pow(bi,k),n) < n);
     }
 
+    private int mcd(int a, int b) {
+        if(b==0)
+           return a;
+       else
+           return mcd(b, a % b);
+    }
+    
     private ArrayList<Integer> calculaConjuntoJs() {
         ArrayList<Integer> resultado = new ArrayList<>();
 
@@ -45,10 +60,12 @@ public class CalculoPrimo {
                 resultado.add(i);
             }
         }
-        
+        return resultado;
     }
 
     private boolean cumpleFuncion(int i) {
         return (n-1)%Math.pow(2d,i) == 0;
     }
+
+
 }
