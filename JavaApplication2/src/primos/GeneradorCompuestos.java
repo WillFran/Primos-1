@@ -9,11 +9,6 @@ public class GeneradorCompuestos extends ArrayList<Integer> {
     }
     
     public Integer dameCompuesto(){
-        int resultado = 1;
-        this.add((int) (Math.random() * Integer.MAX_VALUE));
-        for (Integer comp : this) {
-            resultado *=comp;
-        }
-        return resultado;
+        return 2*(int) (Math.random() * Integer.MAX_VALUE);
     }
 }

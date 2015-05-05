@@ -13,9 +13,10 @@ public class Primos {
         
         int n,m;
         
-        for (int i = 0; i < 25; i++) {
+        System.out.println("PRUEBAS DE PRIMOS----------------------");
+        for (int i = 0; i < 6; i++) {
             n=gen.damePrimo();
-            m=(int) (Math.random() * n);
+            m=(int) (Math.random() * n)+1;
             calculoPrimo = new CalculoPrimo(m, n);
             if(calculoPrimo.ejecutar()){
                 System.out.println("Se determina que no es primo el número: " +n
@@ -25,16 +26,17 @@ public class Primos {
             }
         }
         
+        System.out.println("PRUEBA DE COMPUESTOS---------------------");
         GeneradorCompuestos genC = new GeneradorCompuestos();
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 6; i++) {
             n=genC.dameCompuesto();
             m=(int) (Math.random() * n);
             calculoPrimo = new CalculoPrimo(m, n);
             if(!calculoPrimo.ejecutar()){
-                System.out.println("Se determina que no es primo el número: " +n
-                        +"generado por el generador de primos.");
+                System.out.println("Se determina que no es compueso el número: " +n
+                        +"generado por el generador de compuestos.");
             }else{
-                System.out.println(n+" es presuntamente primo.");
+                System.out.println(n+" es compuesto.");
             }
             
         }
