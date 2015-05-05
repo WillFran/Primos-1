@@ -45,7 +45,7 @@ public class CalculoPrimo {
                 resultado.add(i);
             }
         }
-        
+        return resultado;
     }
 
     private boolean cumpleFuncion(int i) {
