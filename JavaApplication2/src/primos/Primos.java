@@ -30,7 +30,7 @@ public class Primos {
             m=(int) (Math.random() * n);
             calculoPrimo = new CalculoPrimo(m, n);
             if(!calculoPrimo.ejecutar()){
-                System.out.println("Se determina que no es compueso el número: " +n
+                System.out.println("Se determina que es compueso el número: " +n
                         +"generado por el generador de compuestos.");
             }else{
                 System.out.println(n+" es compuesto.");
