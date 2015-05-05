@@ -3,11 +3,7 @@ package primos;
 public class Primos {
 
     public static void main(String[] args) {
-        /*UserInterface ui = new CLIUserInterface();
-        int m = ui.dameNumeroMuestras();
-        int n = ui.dameNumero();*/
-        
-        
+                
         CalculoPrimo calculoPrimo = null;
         GeneradorPrimos gen = new GeneradorPrimos();
         
@@ -18,6 +14,7 @@ public class Primos {
             n=gen.damePrimo();
             m=(int) (Math.random() * n)+1;
             calculoPrimo = new CalculoPrimo(m, n);
+            System.out.println("Probabilidad de acierto: " + (1-1/Math.pow(2, m)));
             if(calculoPrimo.ejecutar()){
                 System.out.println("Se determina que no es primo el número: " +n
                         +"generado por el generador de primos.");
@@ -32,7 +29,6 @@ public class Primos {
             n=genC.dameCompuesto();
             m=(int) (Math.random() * n);
             calculoPrimo = new CalculoPrimo(m, n);
-            System.out.println("Probabilidad de acierto: " + (1-1/Math.pow(2, m)));
             if(!calculoPrimo.ejecutar()){
                 System.out.println("Se determina que no es compueso el número: " +n
                         +"generado por el generador de compuestos.");
