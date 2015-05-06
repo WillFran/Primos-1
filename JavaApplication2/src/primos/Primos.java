@@ -1,21 +1,25 @@
 package primos;
 
+import java.math.BigInteger;
+import java.util.Random;
+
 public class Primos {
 
     public static void main(String[] args) {
                 
         CalculoPrimo calculoPrimo = null;
         GeneradorPrimos gen = new GeneradorPrimos();
-        
-        int n,m;
+        Random rdn = new Random();
+        BigInteger n = null;
+        int m;
         
         System.out.println("PRUEBAS DE PRIMOS----------------------");
         for (int i = 0; i < 6; i++) {
             n=gen.damePrimo();
-            m=(int) (Math.random() * n)+1;
+            m=(int)Math.random()*n.intValue()+1;
             calculoPrimo = new CalculoPrimo(m, n);
             System.out.println("Probabilidad de acierto: " + (1-1/Math.pow(2, m)));
-            if(calculoPrimo.ejecutar()){
+            if(!calculoPrimo.ejecutar()){
                 System.out.println("Se determina que no es primo el número: " +n
                         +"generado por el generador de primos.");
             }else{
@@ -27,7 +31,7 @@ public class Primos {
         GeneradorCompuestos genC = new GeneradorCompuestos();
         for (int i = 0; i < 6; i++) {
             n=genC.dameCompuesto();
-            m=(int) (Math.random() * n);
+            m=(int)Math.random()*n.intValue()+1;
             calculoPrimo = new CalculoPrimo(m, n);
             if(!calculoPrimo.ejecutar()){
                 System.out.println("Se determina que es compueso el número: " +n

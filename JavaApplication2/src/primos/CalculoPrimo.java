@@ -1,15 +1,18 @@
 package primos;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class CalculoPrimo {
 
-    private final int m, n;
+    private final static BigInteger dos = BigInteger.ONE.add(BigInteger.ONE);
+    private final BigInteger n;
+    private final int m;
     private ConjuntoMuestrasNumeros b;
-    private final ArrayList<Integer> conjuntoKs;
+    private final ArrayList<BigInteger> conjuntoKs;
 
-    public CalculoPrimo(int m, int n) {
+    public CalculoPrimo(int m,BigInteger n) {
         this.m = m;
         this.n = n;
         b = new ConjuntoMuestrasNumeros(m, n);
@@ -17,8 +20,8 @@ public class CalculoPrimo {
     }
 
     public boolean ejecutar() {
-        for (Integer bi : b) {
-            if (Math.pow(bi, n-1) % n != 1) {
+        for (BigInteger bi : b) {
+            if (!bi.modPow(n.subtract(BigInteger.ONE), n).equals(BigInteger.ONE)) {
                 return false;
             }
 
@@ -31,40 +34,54 @@ public class CalculoPrimo {
         return true;
     }
 
-    private boolean evaluaCondicionCompuesta(Integer bi) {
-        Iterator<Integer> iterador = conjuntoKs.iterator();
+    private boolean evaluaCondicionCompuesta(BigInteger bi) {
+        Iterator<BigInteger> iterador = conjuntoKs.iterator();
         boolean resultado = false;
         while (iterador.hasNext() && !resultado){ //en conjuntoKs se guardan los valores de k que cumplen la condicion primera
-            Integer k = iterador.next();
+            BigInteger k = iterador.next();
             resultado = segundaCondicion(bi,k); //por tanto sólo hay que comprobar la segunda condicion
         }
         return resultado;
     }
 
-    private boolean segundaCondicion(Integer bi, Integer k) {
-        return (1 < mcd((int)Math.pow(bi,k)-1,n) && mcd((int)Math.pow(bi,k)-1,n) < n);
+    private boolean segundaCondicion(BigInteger bi, BigInteger k) {
+        return compruebaLimiteInferiorIntervalo(bi, k.intValue()) && 
+                compruebaLimiteSuperiorIntervalo(bi, k.intValue());
     }
 
-    private int mcd(int a, int b) {
-        if(b==0)
+    private BigInteger mcd(BigInteger a, BigInteger b) {
+        if(b.equals(BigInteger.ZERO))
            return a;
        else
-           return mcd(b, a % b);
+           return mcd(b, a.mod(b));
     }
     
-    private ArrayList<Integer> calculaConjuntoKs() {
-        ArrayList<Integer> resultado = new ArrayList<>();
-
-        for (int j = 1; j < n - 1; j++) {
+    private ArrayList<BigInteger> calculaConjuntoKs() {
+        ArrayList<BigInteger> resultado = new ArrayList<>();
+        
+        BigInteger ref = BigInteger.TEN.pow(100);
+        
+        for (int j = 1; j < n.intValue() - 1; j++) {
             if (cumpleFuncion(j)) {
-                resultado.add((int) ((n-1)/Math.pow(2d,j)) );
+                resultado.add(
+                      n.subtract(BigInteger.ONE).divide(dos.pow(j))
+                       );
             }
+            if (j % 1000 == 1 && n.compareTo(ref) > 0) 
+                System.out.println("Calulando conjunto de las k último intento fue:" + j);
         }
         return resultado;
     }
 
     private boolean cumpleFuncion(int i) {
-        return (int)((n-1)%Math.pow(2,i)) == 0;
+        return n.subtract(BigInteger.ONE).mod(dos.pow(i)).equals(BigInteger.ZERO);
     }
 
+    private boolean compruebaLimiteInferiorIntervalo(BigInteger bi, int k){
+        return mcd(bi.pow(k).subtract(BigInteger.ONE),n).compareTo(BigInteger.ONE)>0;
+    }
+    
+    private boolean compruebaLimiteSuperiorIntervalo(BigInteger bi, int k){
+        return mcd(bi.pow(k).subtract(BigInteger.ONE),n).compareTo(n)<0;
+    }
 }

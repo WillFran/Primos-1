@@ -1,12 +1,18 @@
 package primos;
 
-import java.util.ArrayList;
+import java.math.BigInteger;
+import java.util.Random;
 
-public class GeneradorCompuestos extends ArrayList<Integer> {
+public class GeneradorCompuestos{
+
+    private final Random rdn;
+    public GeneradorCompuestos() {
+        rdn= new Random();
+    }
 
    
     
-    public Integer dameCompuesto(){
-        return 2*((int) (Math.random()*2000));
+    public BigInteger dameCompuesto(){
+        return new BigInteger(128,(int) Math.random()*128,rdn).multiply(BigInteger.TEN);
     }
 }

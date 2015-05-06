@@ -1,19 +1,20 @@
 package primos;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
-public class GeneradorPrimos extends ArrayList<Integer> {
+public class GeneradorPrimos extends ArrayList<BigInteger> {
 
     public GeneradorPrimos() {
-        this.add(1);
+        this.add(BigInteger.ONE);
     }
     
-    public Integer damePrimo(){
-        int resultado = 1;
-        for (Integer primo : this) {
-            resultado*=primo;
+    public BigInteger damePrimo(){
+        BigInteger resultado = BigInteger.ONE;
+        for (BigInteger primo : this) {
+            resultado=resultado.multiply(primo);
         }
-        resultado+=1;
+        resultado=resultado.add(BigInteger.ONE);
         this.add(resultado);
         return resultado;
     }
