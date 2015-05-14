@@ -61,7 +61,8 @@ public class CalculoPrimo {
         
         BigInteger ref = BigInteger.TEN.pow(100);
         
-        for (int j = 1; j < n.intValue() - 1; j++) {
+        int raizN = (int)(Math.sqrt(n.doubleValue()));
+        for (int j = 1; j < raizN - 1; j++) {
             if (cumpleFuncion(j)) {
                 resultado.add(
                       n.subtract(BigInteger.ONE).divide(dos.pow(j))
