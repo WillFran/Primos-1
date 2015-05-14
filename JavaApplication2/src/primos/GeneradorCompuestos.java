@@ -1,18 +1,25 @@
 package primos;
 
 import java.math.BigInteger;
-import java.util.Random;
+import java.util.ArrayList;
 
-public class GeneradorCompuestos{
+public class GeneradorCompuestos extends ArrayList<BigInteger> implements GeneradorNúmeros{
 
-    private final Random rdn;
-    public GeneradorCompuestos() {
-        rdn= new Random();
+    private int index = -1;
+    public GeneradorCompuestos() { 
+        for (BigInteger bigInteger : new Cargador("compuestos.txt").carga()) {
+            this.add(bigInteger);
+        }
+
     }
 
    
     
-    public BigInteger dameCompuesto(){
-        return new BigInteger(128,(int) Math.random()*128,rdn).multiply(BigInteger.TEN);
+    public BigInteger dameSiguiente(){
+        index++;
+        if(index> this.size()) return null;
+        return this.get(index);
     }
+
+    
 }

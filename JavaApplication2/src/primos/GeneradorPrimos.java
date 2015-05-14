@@ -3,20 +3,22 @@ package primos;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-public class GeneradorPrimos extends ArrayList<BigInteger> {
+public class GeneradorPrimos extends ArrayList<BigInteger> implements GeneradorNúmeros {
 
+    int index = -1;
     public GeneradorPrimos() {
-        this.add(BigInteger.ONE);
+        for (BigInteger bigInteger : new Cargador("primos.txt").carga()) {
+            this.add(bigInteger);
+        }
+ 
     }
     
-    public BigInteger damePrimo(){
-        BigInteger resultado = BigInteger.ONE;
-        for (BigInteger primo : this) {
-            resultado=resultado.multiply(primo);
-        }
-        resultado=resultado.add(BigInteger.ONE);
-        this.add(resultado);
-        return resultado;
+    @Override
+    public BigInteger dameSiguiente(){
+        index++;
+        if(index> this.size()) return null;
+        return this.get(index);
     }
+
     
 }

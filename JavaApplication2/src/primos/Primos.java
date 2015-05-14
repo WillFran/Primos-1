@@ -15,8 +15,8 @@ public class Primos {
         
         System.out.println("PRUEBAS DE PRIMOS----------------------");
         for (int i = 0; i < 6; i++) {
-            n=gen.damePrimo();
-            m=(int)Math.random()*n.intValue()+1;
+            n=gen.dameSiguiente();
+            m=(int)(Math.random()*n.intValue())+1;
             calculoPrimo = new CalculoPrimo(m, n);
             System.out.println("Probabilidad de acierto: " + (1-1/Math.pow(2, m)));
             if(!calculoPrimo.ejecutar()){
@@ -30,7 +30,7 @@ public class Primos {
         System.out.println("PRUEBA DE COMPUESTOS---------------------");
         GeneradorCompuestos genC = new GeneradorCompuestos();
         for (int i = 0; i < 6; i++) {
-            n=genC.dameCompuesto();
+            n=genC.dameSiguiente();
             m=(int)Math.random()*n.intValue()+1;
             calculoPrimo = new CalculoPrimo(m, n);
             if(!calculoPrimo.ejecutar()){
